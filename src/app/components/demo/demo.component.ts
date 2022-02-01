@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StatusService } from 'src/app/services/status.service';
 
 @Component({
   selector: 'app-demo',
@@ -10,18 +11,14 @@ export class DemoComponent implements OnInit {
   isOn = false;
   message = "Off";
 
-  constructor() { }
+  constructor(private service: StatusService) { }
 
   ngOnInit(): void {
   }
 
   clicked() {
     this.isOn = !this.isOn;
-    if(this.isOn) {
-      this.message = "On";
-    } else {
-      this.message = "Off";
-    }
+    this.message = this.service.getStatus(this.isOn);
   }
 
 }
